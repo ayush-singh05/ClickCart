@@ -12,4 +12,8 @@ public interface ProductService {
     public ProductResponseDto addProduct(ProductRequestDto productRequestDto);
 
     List<ProductResponseDto> getAllProduct();
+
+    ProductResponseDto updateProduct(int productId, ProductRequestDto productRequestDto);
+
+
 }

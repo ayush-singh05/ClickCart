@@ -11,15 +11,16 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class ProductResponseDto {
+    Integer productId;
     String productName;
     String category;
     String description;
-    int availableQuantity;
+    Integer availableQuantity;
     String brand;
-    int stockQuantity;
-    double price;
-    double originalPrice;
-    boolean active;
+    Integer stockQuantity;
+    Double price;
+    Double originalPrice;
+    Boolean active;
     LocalDateTime createdAt;
     LocalDateTime updateAt;
 }

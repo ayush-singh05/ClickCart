@@ -13,7 +13,7 @@ public class ProductTransformer {
                 .productName(productRequestDto.getProductName())
                 .price(productRequestDto.getPrice())
                 .productDescription(productRequestDto.getProductDescription())
-                .active(productRequestDto.isActive())
+                .active(productRequestDto.getActive())
                 .originalPrice(productRequestDto.getOriginalPrice())
                 .stockQuantity(productRequestDto.getStockQuantity())
                 .category(productRequestDto.getCategory())
@@ -26,10 +26,12 @@ public class ProductTransformer {
 
     public static ProductResponseDto productToProductResponseDto(Product product) {
             ProductResponseDto productResponseDto = ProductResponseDto.builder()
+                    .productId(product.getProductId())
                     .productName(product.getProductName())
                     .description(product.getProductDescription())
                     .brand(product.getBrand())
                     .price(product.getPrice())
+                    .active(product.getActive())
                     .originalPrice(product.getOriginalPrice())
                     .category(product.getCategory())
                     .updateAt(product.getUpdatedAt())
@@ -38,5 +40,32 @@ public class ProductTransformer {
                     .stockQuantity(product.getStockQuantity())
                     .build();
             return productResponseDto;
+    }
+
+    public static void productRequestDtoToUpdateProduct(Product product, ProductRequestDto dto){
+        if(dto.getBrand() != null){
+            product.setBrand(dto.getBrand());
+        }
+        if(dto.getProductName() != null){
+            product.setProductName(dto.getProductName());
+        }
+        if(dto.getProductDescription() != null){
+            product.setProductDescription(dto.getProductDescription());
+        }
+        if(dto.getAvailableQuantity() != null){
+            product.setAvailableQuantity(dto.getAvailableQuantity());
+        }
+        if(dto.getCategory() != null){
+            product.setCategory(dto.getCategory());
+        }
+        if(dto.getPrice() != null){
+            product.setPrice(dto.getPrice());
+        }
+        if(dto.getStockQuantity() != null){
+            product.setStockQuantity(dto.getStockQuantity());
+        }
+        if(dto.getOriginalPrice() != null){
+            product.setOriginalPrice(dto.getOriginalPrice());
+        }
     }
 }

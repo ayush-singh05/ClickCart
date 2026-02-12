@@ -3,6 +3,7 @@ package com.clickcart.ClickCart.service.impls;
 import com.clickcart.ClickCart.dto.request.UpdateCartRequestDto;
 import com.clickcart.ClickCart.dto.response.CartResponseDto;
 import com.clickcart.ClickCart.exception.CartItemNotFoundException;
+import com.clickcart.ClickCart.exception.ProductNotFoundException;
 import com.clickcart.ClickCart.exception.UserAlreadyExistsException;
 import com.clickcart.ClickCart.model.Cart;
 import com.clickcart.ClickCart.model.CartItem;
@@ -38,10 +39,10 @@ public class CartServiceImpls implements CartService {
 
     @Override
     public CartResponseDto addToCart(int userId, int productId, Integer quantity) {
-        try{
+
             User user = userRepository.findById(userId);
-            Product product = productRepo.findById(productId);
-//            Cart cart = cartRepository.findByUser(user);
+            Product product = productRepo.findById(productId).orElseThrow(() -> new ProductNotFoundException("Invalid Product Id"));
+//
             Cart cart = cartRepository.findByUser(user)
                     .orElseGet(() -> {
                         Cart newCart = Cart.builder()
@@ -74,9 +75,7 @@ public class CartServiceImpls implements CartService {
             cart.getCartItemList().add(cartItem);
             Cart saveCart = cartRepository.save(cart);
             return CartTransformer.cartToCartResponseDto(saveCart);
-        }catch (Exception e){
-            throw new UserAlreadyExistsException(e.getMessage());
-        }
+
     }
 
     @Override

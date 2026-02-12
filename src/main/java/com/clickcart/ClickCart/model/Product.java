@@ -40,10 +40,10 @@ public class Product {
     @Column(name = "available_quantity",nullable = false)
     Integer availableQuantity;
 
-    boolean active;
+    Boolean active;
 
     @Column(nullable = false)
-    int stockQuantity;
+    Integer stockQuantity;
 
     LocalDateTime createdAt;
 

@@ -1,12 +1,8 @@
 package com.clickcart.ClickCart.dto.request;
 
-import jakarta.persistence.Column;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,43 +15,19 @@ public class ProductRequestDto {
 
     String productDescription;
 
-    double price;
+    Double price;
 
-    double originalPrice;
+    Double originalPrice;
 
     String brand;
 
-    int availableQuantity;
+    Integer availableQuantity;
 
-    int stockQuantity;
+    Integer stockQuantity;
 
     String category;
 
-    boolean active = true;
+    Boolean active = true;
 
     String productImage;
 }
-
-/*
-*
-
-    String productName;
-    String productDescription;
-
-    String productImage;
-
-    String brand;
-    Double price;
-
-    Double originalPrice; // For showing discount
-
-    String category;
-    Integer availableQuantity;
-
-    boolean active;
-    int stockQuantity;
-
-    LocalDateTime createdAt;
-
-    LocalDateTime updatedAt;
-* */

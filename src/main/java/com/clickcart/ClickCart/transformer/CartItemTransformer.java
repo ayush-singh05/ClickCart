@@ -29,8 +29,7 @@ import com.clickcart.ClickCart.model.Product;
                     .productDescription(product.getProductDescription())
                     .productImage(product.getProductImage())
                     .productBrand(product.getBrand())
-                    .productCategory(product.getCategory() != null ?
-                            product.getCategory().toString() : null)
+                    .productCategory(product.getCategory() != null ? product.getCategory().toString() : null)
                     .quantity(cartItem.getQuantity())
                     .unitPrice(cartItem.getPrice())
                     .originalPrice(originalPrice)

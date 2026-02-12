@@ -34,4 +34,10 @@ public class ProductController {
         return ResponseEntity.ok(productList);
 
     }
+    @PutMapping("/update")
+    public ResponseEntity updateProduct(@RequestParam int productId, @RequestBody ProductRequestDto productRequestDto){
+
+        ProductResponseDto productResponseDto = productService.updateProduct(productId, productRequestDto);
+        return ResponseEntity.ok(productResponseDto);
+    }
 }

@@ -40,5 +40,14 @@ public class ProductServiceImpls implements ProductService {
         return responseList;
     }
 
+    @Override
+    public ProductResponseDto updateProduct(int productId, ProductRequestDto productRequestDto) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException("Invalid Product Id"));
+        ProductTransformer.productRequestDtoToUpdateProduct(product, productRequestDto);
+        Product saveProduct = productRepository.save(product);
+        return ProductTransformer.productToProductResponseDto(saveProduct);
+
+    }
+
 
 }
