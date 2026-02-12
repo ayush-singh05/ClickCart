@@ -26,6 +26,7 @@ public class Product {
 
     String productImage;
 
+    @Column(nullable = false)
     String brand;
 
     @Column(nullable = false)
@@ -33,6 +34,7 @@ public class Product {
 
     Double originalPrice; // For showing discount
 
+    @Column(nullable = false)
     String category;
 
     @Column(name = "available_quantity",nullable = false)

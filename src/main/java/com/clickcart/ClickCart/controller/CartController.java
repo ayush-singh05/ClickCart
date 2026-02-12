@@ -1,5 +1,7 @@
 package com.clickcart.ClickCart.controller;
 
+import com.clickcart.ClickCart.dto.request.UpdateCartRequestDto;
+import com.clickcart.ClickCart.dto.response.CartResponseDto;
 import com.clickcart.ClickCart.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,5 +29,11 @@ public class CartController {
     public ResponseEntity removeFromCart(@PathVariable Integer cartItemId){
             cartService.removeItem(cartItemId);
         return ResponseEntity.ok("Cart Item Remove Successfully");
+    }
+
+    @PostMapping("/item/update")
+    public ResponseEntity updateCart(@RequestBody UpdateCartRequestDto request){
+        CartResponseDto cartResponseDto = cartService.updateCart(request.getCartItemId(),request.getCartItemId());
+        return ResponseEntity.ok(cartResponseDto);
     }
 }

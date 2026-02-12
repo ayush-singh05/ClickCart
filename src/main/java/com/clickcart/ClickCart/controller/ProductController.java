@@ -8,10 +8,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -26,5 +25,13 @@ public class ProductController {
         }catch (DataIntegrityViolationException e){
             return new ResponseEntity<>((HttpHeaders)null, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity getAllProduct(){
+
+        List<ProductResponseDto> productList = productService.getAllProduct();
+        return ResponseEntity.ok(productList);
+
     }
 }

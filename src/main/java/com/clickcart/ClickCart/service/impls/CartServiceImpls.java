@@ -1,5 +1,6 @@
 package com.clickcart.ClickCart.service.impls;
 
+import com.clickcart.ClickCart.dto.request.UpdateCartRequestDto;
 import com.clickcart.ClickCart.dto.response.CartResponseDto;
 import com.clickcart.ClickCart.exception.CartItemNotFoundException;
 import com.clickcart.ClickCart.exception.UserAlreadyExistsException;
@@ -89,5 +90,11 @@ public class CartServiceImpls implements CartService {
             cartItemRepository.delete(cartItem);
         log.info("Cart item {} removed successfully", cartItemId);
 
+    }
+
+    @Override
+    public CartResponseDto updateCart(int cartItemId, int quantity) {
+        Cart cart = cartRepository.findById(cartItemId).orElseThrow(() -> new CartItemNotFoundException("No item in your Cart"));
+        return null;
     }
 }
