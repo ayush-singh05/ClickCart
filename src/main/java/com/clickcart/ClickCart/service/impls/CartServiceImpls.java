@@ -1,11 +1,13 @@
 package com.clickcart.ClickCart.service.impls;
 
 import com.clickcart.ClickCart.dto.response.CartResponseDto;
+import com.clickcart.ClickCart.exception.CartItemNotFoundException;
 import com.clickcart.ClickCart.exception.UserAlreadyExistsException;
 import com.clickcart.ClickCart.model.Cart;
 import com.clickcart.ClickCart.model.CartItem;
 import com.clickcart.ClickCart.model.Product;
 import com.clickcart.ClickCart.model.User;
+import com.clickcart.ClickCart.repository.CartItemRepository;
 import com.clickcart.ClickCart.repository.CartRepository;
 import com.clickcart.ClickCart.repository.ProductRepository;
 import com.clickcart.ClickCart.repository.UserRepository;
@@ -26,6 +28,9 @@ public class CartServiceImpls implements CartService {
 
     @Autowired
     CartRepository cartRepository;
+
+    @Autowired
+    CartItemRepository cartItemRepository;
     @Autowired
     ProductRepository productRepo;
     private static final Logger log = LoggerFactory.getLogger(CartService.class);
@@ -80,6 +85,9 @@ public class CartServiceImpls implements CartService {
 
     @Override
     public void removeItem(int cartItemId) {
+            CartItem cartItem = cartItemRepository.findById(cartItemId).orElseThrow(() -> new CartItemNotFoundException("Cart is Not found with id"+ cartItemId));
+            cartItemRepository.delete(cartItem);
+        log.info("Cart item {} removed successfully", cartItemId);
 
     }
 }
