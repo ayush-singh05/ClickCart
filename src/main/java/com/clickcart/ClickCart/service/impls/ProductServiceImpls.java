@@ -70,5 +70,19 @@ public class ProductServiceImpls implements ProductService {
         return responseList;
     }
 
+    @Override
+    public List<ProductResponseDto> searchProduct(String keyword) {
+        if (keyword == null || keyword.isBlank()) {
+            throw new IllegalArgumentException("Keyword cannot be empty");
+        }
+        List<Product> products = productRepository.searchProducts(keyword);
+        List<ProductResponseDto> responseDtos = new ArrayList<>();
+        for(Product pro : products){
+            responseDtos.add(ProductTransformer.productToProductResponseDto(pro));
+        }
+
+        return responseDtos;
+    }
+
 
 }
