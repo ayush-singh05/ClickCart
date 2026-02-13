@@ -40,4 +40,17 @@ public class ProductController {
         ProductResponseDto productResponseDto = productService.updateProduct(productId, productRequestDto);
         return ResponseEntity.ok(productResponseDto);
     }
+
+    @DeleteMapping("/delete/{productId}")
+    public ResponseEntity deleteProduct(@PathVariable int productId){
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok("Product Delete Successfully");
+
+    }
+    @GetMapping("/category/{category}")
+    public ResponseEntity getProductCategory(@PathVariable String category) {
+        List<ProductResponseDto> response = productService.getProductCategory(category);
+        return ResponseEntity.ok(response);
+    }
+
 }

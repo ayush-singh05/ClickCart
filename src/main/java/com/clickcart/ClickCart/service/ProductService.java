@@ -16,4 +16,7 @@ public interface ProductService {
     ProductResponseDto updateProduct(int productId, ProductRequestDto productRequestDto);
 
 
+    void deleteProduct(int productId);
+
+    List<ProductResponseDto> getProductCategory(String category);
 }

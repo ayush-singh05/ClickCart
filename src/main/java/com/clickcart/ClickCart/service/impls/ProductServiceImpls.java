@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpls implements ProductService {
@@ -47,6 +48,26 @@ public class ProductServiceImpls implements ProductService {
         Product saveProduct = productRepository.save(product);
         return ProductTransformer.productToProductResponseDto(saveProduct);
 
+    }
+
+    @Override
+    public void deleteProduct(int productId) {
+        Product product = productRepository.findById(productId)
+                .orElseThrow(() -> new ProductNotFoundException("Invalid Product Id"));
+                productRepository.delete(product);
+    }
+
+    @Override
+    public List<ProductResponseDto> getProductCategory(String category) {
+
+        List<Product> product = productRepository.findByCategory(category);
+        List<ProductResponseDto> responseList = new ArrayList<>();
+
+        for(Product product1 : product){
+            responseList.add(ProductTransformer.productToProductResponseDto(product1));
+        }
+
+        return responseList;
     }
 
 
