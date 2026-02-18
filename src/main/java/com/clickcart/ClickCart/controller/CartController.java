@@ -17,23 +17,31 @@ public class CartController {
 
     @PostMapping("/add")
     public ResponseEntity addToCart(@RequestParam int userId,@RequestParam int productId,@RequestParam Integer quantity){
-        try {
-            return new ResponseEntity(cartService.addToCart(userId,productId,quantity),HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity(cartService.addToCart(userId,productId,quantity),HttpStatus.OK);
 
     }
 
-    @DeleteMapping("/item/{cartItemId}")
+    @DeleteMapping("/item/delete/{cartItemId}")
     public ResponseEntity removeFromCart(@PathVariable Integer cartItemId){
             cartService.removeItem(cartItemId);
         return ResponseEntity.ok("Cart Item Remove Successfully");
     }
 
-    @PostMapping("/item/update")
-    public ResponseEntity updateCart(@RequestBody UpdateCartRequestDto request){
-        CartResponseDto cartResponseDto = cartService.updateCart(request.getCartItemId(),request.getCartItemId());
+    @PutMapping("/item/update")
+    public ResponseEntity updateCart(@RequestParam int cartItemId, @RequestParam int quantity){
+        CartResponseDto cartResponseDto = cartService.updateCart(cartItemId,quantity);
         return ResponseEntity.ok(cartResponseDto);
+    }
+
+    @DeleteMapping("/item/clear/{userId}")
+    public ResponseEntity clearCart(@PathVariable int userId){
+        cartService.clearCart(userId);
+
+        return ResponseEntity.ok("No items in your cart");
+    }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity getCartByUser(@PathVariable int userId){
+        CartResponseDto responseDto = cartService.getCartByUser(userId);
+        return ResponseEntity.ok(responseDto);
     }
 }
